@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir> <env-dir>
+
+set -eo pipefail
+
+fly_dir="$1/.fly"
+profile_dir="$1/.profile.d"
+
+mkdir -p $fly_dir
+mkdir -p $profile_dir
+
+export FLYCTL_INSTALL="$fly_dir"
+curl -fsLS https://fly.io/install.sh | sh >/dev/null 2>/dev/null
+
+cat <<-EOF > $profile_dir/superfly.sh
+export PATH="\$HOME/.fly/bin:\$PATH"
+EOF
+
+echo "       flyctl was installed successfully"
