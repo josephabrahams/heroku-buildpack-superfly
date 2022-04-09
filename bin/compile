@@ -11,6 +11,7 @@ mkdir -p $profile_dir
 
 export FLYCTL_INSTALL="$fly_dir"
 curl -fsLS https://fly.io/install.sh | sh >/dev/null 2>/dev/null
+ln -fs flyctl $fly_dir/bin/fly
 
 cat <<-EOF > $profile_dir/superfly.sh
 export PATH="\$HOME/.fly/bin:\$PATH"
